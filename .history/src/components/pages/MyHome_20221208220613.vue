@@ -8,6 +8,7 @@
           :movie="movie"
           :genres="GENRES"
         />
+      </keep-alive>
     </div>
     <ComingSoon />
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
     <div class="mt-20 flex border-b border-gray-600 pb-2">
-      <img :src="posterPath" alt="" class="w-64" />
+      <img :src="IMAGE" alt="" class="w-64" />
       <div class="ml-24">
         <h1 class="text-4xl font-semibold">{{ CURRENT_MOVIE.title }}</h1>
         <div class="flex items-center gap-1">
@@ -164,6 +164,13 @@ export default {
       behavior: 'smooth',
     });
   },
+  mounted() {
+    this.SET_IMAGE({
+      path: this.CURRENT_MOVIE.poster_path,
+      baseURL: 'https://image.tmdb.org/t/p/original/',
+      default: 'https://via.placeholder.com/300x450',
+    });
+  },
   methods: {
     ...mapMutations(['SET_IMAGE']),
     ...mapActions(['FETCH_CURRENT_MOVIE']),
@@ -184,11 +191,6 @@ export default {
   },
   computed: {
     ...mapGetters(['CURRENT_MOVIE', 'CURRENT_MOVIE_GENRES']),
-    posterPath() {
-      return this.CURRENT_MOVIE.poster_path
-        ? 'https://image.tmdb.org/t/p/original/' + this.CURRENT_MOVIE.poster_path
-        : 'https://via.placeholder.com/300x450';
-    },
   },
   watch: {
     '$route.params.id': {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="`/actors/${actor.id}`">
-      <img :src="posterPath" alt="" />
+      <img :src="IMAGE" alt="" />
     </router-link>
     <h3>{{ actor.name }}</h3>
     <p class="text-gray-400">{{ actorKnowns.join(',') }}</p>
@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import {  mapMutations } from 'vuex';
+
 export default {
   props: {
     actor: {
@@ -29,6 +31,7 @@ export default {
     });
   },
   methods: {
+    ...mapMutations(['SET_IMAGE']),
     knownFor() {
       for (let item in this.actor.known_for) {
         if (this.actor.known_for[item].title) {
@@ -38,10 +41,17 @@ export default {
     },
   },
   computed: {
-    posterPath() {
-      return this.actor.profile_path
-        ? 'https://image.tmdb.org/t/p/w500/' + this.actor.profile_path
-        : 'https://via.placeholder.com/300x450';
+   
+  },
+  watch: {
+    CURRENT_MOVIE: {
+      handler(newValue) {
+        this.SET_IMAGE({
+          path: newValue.poster_path,
+          baseURL: 'https://image.tmdb.org/t/p/original/',
+          default: 'https://via.placeholder.com/300x450',
+        });
+      },
     },
   },
 };

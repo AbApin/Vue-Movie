@@ -164,6 +164,13 @@ export default {
       behavior: 'smooth',
     });
   },
+  mounted() {
+    this.SET_IMAGE({
+      path: ,
+      baseURL: '',
+      default: 'https://via.placeholder.com/300x450',
+    });
+  },
   methods: {
     ...mapMutations(['SET_IMAGE']),
     ...mapActions(['FETCH_CURRENT_MOVIE']),
@@ -186,7 +193,7 @@ export default {
     ...mapGetters(['CURRENT_MOVIE', 'CURRENT_MOVIE_GENRES']),
     posterPath() {
       return this.CURRENT_MOVIE.poster_path
-        ? 'https://image.tmdb.org/t/p/original/' + this.CURRENT_MOVIE.poster_path
+        ? 'https://image.tmdb.org/t/p/w500' + this.CURRENT_MOVIE.poster_path
         : 'https://via.placeholder.com/300x450';
     },
   },

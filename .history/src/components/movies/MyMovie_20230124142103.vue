@@ -164,6 +164,13 @@ export default {
       behavior: 'smooth',
     });
   },
+  mounted() {
+    this.SET_IMAGE({
+      path: ,
+      baseURL: '',
+      default: 'https://via.placeholder.com/300x450',
+    });
+  },
   methods: {
     ...mapMutations(['SET_IMAGE']),
     ...mapActions(['FETCH_CURRENT_MOVIE']),

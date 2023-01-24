@@ -63,6 +63,13 @@ export default {
     };
   },
   mounted() {
+    this.$nextTick(() => {
+      this.SET_IMAGE({
+        path: this.movie.poster_path,
+        baseURL: 'https://image.tmdb.org/t/p/w500',
+        default: 'https://via.placeholder.com/300x450',
+      });
+    });
     this.getGenreNames();
   },
   methods: {
@@ -79,8 +86,8 @@ export default {
   },
   computed: {
     posterPath() {
-      return this.movie.poster_path
-        ? 'https://image.tmdb.org/t/p/w500' + this.movie.poster_path
+      return this.movie.profile_path
+        ? 'https://image.tmdb.org/t/p/w500' + this.movie.poster_path,
         : 'https://via.placeholder.com/300x450';
     },
   },

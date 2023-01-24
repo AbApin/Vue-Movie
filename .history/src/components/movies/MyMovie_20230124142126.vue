@@ -163,7 +163,7 @@ export default {
       top: 0,
       behavior: 'smooth',
     });
-  },
+  }
   methods: {
     ...mapMutations(['SET_IMAGE']),
     ...mapActions(['FETCH_CURRENT_MOVIE']),
